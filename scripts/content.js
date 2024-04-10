@@ -36,6 +36,16 @@ const body_mutation_callback = (mutation_list, observer) => {
 const body_observer = new MutationObserver(body_mutation_callback);
 body_observer.observe(document.body, body_mutation_config);
 
+chrome.runtime.onMessage.addListener(
+    function (request, sender, sendResponse) {
+        if (request == 'reset') {
+            for (const concentrateCheckbox of document.getElementsByClassName('concentrate-checkbox')) {
+                concentrateCheckbox.checked = false;
+            }
+        }
+    }
+);
+
 function createExtensionsDiv() {
     let extensionDiv = document.createElement('div');
     extensionDiv.className = 'extensions-div';

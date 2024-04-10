@@ -1,16 +1,14 @@
 document.getElementById('dndcte_resetTrackerBtn').addEventListener('click', reset_tracker);
-console.log('asd');
-console.log(document.getElementById('dndcte_resetTrackerBtn'));
 
 function reset_tracker() {
     if (confirm('Are you sure you want to reset?') == true) {
-        reset_concentrates();
+        sendToContent('reset');
     }
 }
 
-function reset_concentrates() {
-    console.log(document.getElementsByClassName('concentrate-checkbox'));
-    for (const concentrateCheckbox of document.getElementsByClassName('concentrate-checkbox')) {
-        concentrateCheckbox.checked = false;
-    }
+function sendToContent(message_to_send) {
+    chrome.tabs.query({ currentWindow: true, active: true }, function (tabs) {
+        var activeTab = tabs[0];
+        chrome.tabs.sendMessage(activeTab.id, message_to_send);
+    });
 }
