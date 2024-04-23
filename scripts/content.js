@@ -1,11 +1,6 @@
 
 const body_mutation_config = { attribute: true, childList: true, subtree: true, characterData: true, characterDataOldValue: true };
 
-//TODO:
-// - Siirrä concentrate osaksi efektiä, muokkaa tarkistus tukemaan muutosta
-// - Tablen tyylit
-// - Korjaa aktiivisen pelaajan laatikon reunukset (CSS injektio?)
-// - Tablen kestojen laskeminen kun vuoro vaihtuu ja tulee hahmon vuoro
 
 const body_mutation_callback = (mutation_list, observer) => {
     for (const mutation of mutation_list) {
@@ -165,11 +160,6 @@ function removeButtonClicked(clickEvent) {
 }
 
 function checkIsConcentrating(combatantCard) {
-    console.log(combatantCard);
-    console.log(combatantCard.nextElementSibling);
-    console.log(combatantCard.nextElementSibling.querySelector('.concentrate-checkbox'));
-    console.log(combatantCard.nextElementSibling.querySelector('.concentrate-checkbox').checked);
-
     if (combatantCard.nextElementSibling.querySelector('.concentrate-checkbox').checked) {
         const characterName = combatantCard.querySelector('.combatant-summary__name').textContent;
         alert(`CHECK ${characterName} CONCENTRATE`);
