@@ -160,8 +160,10 @@ function removeButtonClicked(clickEvent) {
 }
 
 function checkIsConcentrating(combatantCard) {
-    if (combatantCard.nextElementSibling.querySelector('.concentrate-checkbox').checked) {
-        const characterName = combatantCard.querySelector('.combatant-summary__name').textContent;
-        alert(`CHECK ${characterName} CONCENTRATE`);
-    }
+    combatantCard.nextElementSibling.querySelectorAll('.concentrate-checkbox').forEach(element => {
+        if (element.checked) {
+            const characterName = combatantCard.querySelector('.combatant-summary__name').textContent;
+            alert(`CHECK ${characterName} CONCENTRATE`);
+        }
+    });
 }
