@@ -10,7 +10,6 @@ const body_mutation_callback = (mutation_list, observer) => {
             if (mutation.target.className.includes('combatant-card--character') && mutation.addedNodes.length > 0 && mutation.addedNodes[0].className == 'combatant-card__right-bit') {
                 let extensionDiv = createExtensionsDiv();
                 createEffectDiv(extensionDiv);
-                modifyCharacterCardStyle(mutation.target);
                 mutation.target.insertAdjacentElement('afterEnd', extensionDiv);
                 initDone = true;
             }
@@ -138,11 +137,6 @@ function setButtonClicked(clickEvent) {
     effectsTableRowDeleteBtn.innerText = 'Delete';
     effectsTableRowDeleteBtn.addEventListener('click', removeButtonClicked);
     buttonCell.appendChild(effectsTableRowDeleteBtn);
-}
-
-function modifyCharacterCardStyle(characterCard) {
-    characterCard.querySelector('.combatant-card__left-bit').style.borderBottomLeftRadius = '0px';
-    characterCard.querySelector('.combatant-card__right-bit').style.borderBottomRightRadius = '0px';
 }
 
 function removeButtonClicked(clickEvent) {

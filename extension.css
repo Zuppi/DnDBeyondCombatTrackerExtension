@@ -1,3 +1,4 @@
+/* Extension styles */
 .extensions-div {
     display: flex;
     margin-bottom: 8px;
@@ -27,4 +28,20 @@
 
 .concentrate-checkbox {
     transform: scale(1.5);
+}
+
+/* Modifications to the original elements */
+
+
+.combatant-card.is-turn .combatant-card__mid-bit {
+    border: none !important;
+    border-top: 2px solid #1b9af0 !important;
+}
+
+.combatant-card__left-bit {
+    border-bottom-left-radius: 0px !important;
+}
+
+.combatant-card__right-bit {
+    border-bottom-right-radius: 0px !important;
 }
