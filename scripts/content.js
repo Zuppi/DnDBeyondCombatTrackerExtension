@@ -1,6 +1,7 @@
 
 const body_mutation_config = { attribute: true, childList: true, subtree: true, characterData: true, characterDataOldValue: true };
 
+let initDone = false;
 
 const body_mutation_callback = (mutation_list, observer) => {
     for (const mutation of mutation_list) {
@@ -11,6 +12,7 @@ const body_mutation_callback = (mutation_list, observer) => {
                 createEffectDiv(extensionDiv);
                 modifyCharacterCardStyle(mutation.target);
                 mutation.target.insertAdjacentElement('afterEnd', extensionDiv);
+                initDone = true;
             }
         }
         else if (mutation.type === 'characterData') {
@@ -21,6 +23,12 @@ const body_mutation_callback = (mutation_list, observer) => {
                     checkIsConcentrating(characterCard);
                 }
 
+            }
+            else if (initDone && mutation.target.parentElement.parentElement.className.includes('turn-controls__turn')) {
+                let activeCharacterCard = document.querySelector('.combatant-card--character.is-turn');
+                activeCharacterCard.nextElementSibling.querySelectorAll('.duration-input').forEach(element => {
+                    element.stepDown();
+                });
             }
         }
     }
@@ -101,6 +109,7 @@ function addEffectTableInputRow(effectsTable) {
     effectsTableDurationInputCell.className = 'duration-input-cell';
     let effectsTableDurationInput = document.createElement('input');
     effectsTableDurationInput.type = 'number';
+    effectsTableDurationInput.className = 'duration-input';
     effectsTableDurationInput.style.maxWidth = '5rem';
     effectsTableDurationInputCell.appendChild(effectsTableDurationInput);
     effectsTableInputRow.appendChild(effectsTableDurationInputCell);
