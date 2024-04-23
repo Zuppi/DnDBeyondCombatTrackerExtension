@@ -1,0 +1,30 @@
+.extensions-div {
+    display: flex;
+    margin-bottom: 8px;
+    padding: 3px;
+    border: 1px solid #d8e1e8;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+
+.add-effect-btn {
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+}
+
+.name-input {
+    max-width: 10rem;
+}
+
+.duration-input {
+    max-width: 5rem;
+}
+
+.concentrating-input-cell {
+    display: flex;
+    justify-content: center;
+}
+
+.concentrate-checkbox {
+    transform: scale(1.5);
+}

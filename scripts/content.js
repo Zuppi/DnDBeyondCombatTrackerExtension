@@ -56,12 +56,6 @@ function addEffectClick(clickEvent) {
 function createExtensionsDiv() {
     let extensionDiv = document.createElement('div');
     extensionDiv.className = 'extensions-div';
-    extensionDiv.style.display = 'flex';
-    extensionDiv.style.marginBottom = '8px';
-    extensionDiv.style.padding = '3px';
-    extensionDiv.style.border = '1px solid #d8e1e8';
-    extensionDiv.style.borderBottomLeftRadius = '3px';
-    extensionDiv.style.borderBottomRightRadius = '3px';
     return extensionDiv;
 }
 
@@ -90,8 +84,6 @@ function createEffectDiv(extensionDiv) {
     addEffectBtn.type = 'button';
     addEffectBtn.className = 'add-effect-btn';
     addEffectBtn.innerText = 'Add effect';
-    addEffectBtn.style.marginTop = '0.4rem';
-    addEffectBtn.style.marginBottom = '0.4rem';
     addEffectBtn.addEventListener('click', addEffectClick);
     effectDiv.appendChild(addEffectBtn);
 }
@@ -101,8 +93,8 @@ function addEffectTableInputRow(effectsTable) {
     let effectsTableNameInputCell = document.createElement('td');
     effectsTableNameInputCell.className = 'name-input-cell';
     let effectsTableNameInput = document.createElement('input');
+    effectsTableNameInput.className = 'name-input';
     effectsTableNameInput.type = 'text';
-    effectsTableNameInput.style.maxWidth = '10rem';
     effectsTableNameInputCell.appendChild(effectsTableNameInput);
     effectsTableInputRow.appendChild(effectsTableNameInputCell);
     let effectsTableDurationInputCell = document.createElement('td');
@@ -110,19 +102,13 @@ function addEffectTableInputRow(effectsTable) {
     let effectsTableDurationInput = document.createElement('input');
     effectsTableDurationInput.type = 'number';
     effectsTableDurationInput.className = 'duration-input';
-    effectsTableDurationInput.style.maxWidth = '5rem';
     effectsTableDurationInputCell.appendChild(effectsTableDurationInput);
     effectsTableInputRow.appendChild(effectsTableDurationInputCell);
     let concentratingInputCell = document.createElement('td');
     concentratingInputCell.className = 'concentrating-input-cell';
-    concentratingInputCell.style.display = 'flex';
-    concentratingInputCell.style.justifyContent = 'center';
     let concentrateCheck = document.createElement('input');
     concentrateCheck.type = 'checkbox';
     concentrateCheck.className = 'concentrate-checkbox';
-    concentrateCheck.style.marginLeft = '0px';
-    concentrateCheck.style.verticalAlign = 'middle';
-    concentrateCheck.style.transform = 'scale(1.5)';
     concentratingInputCell.appendChild(concentrateCheck);
     effectsTableInputRow.appendChild(concentratingInputCell);
     let effectsTableSetBtnCell = document.createElement('td');
