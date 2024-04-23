@@ -8,6 +8,13 @@
     border-bottom-right-radius: 3px;
 }
 
+.is-turn+.extensions-div {
+    border: none;
+    border-left: 2px solid #1b9af0;
+    border-bottom: 2px solid #1b9af0;
+    border-right: 2px solid #1b9af0;
+}
+
 .add-effect-btn {
     margin-top: 0.4rem;
     margin-bottom: 0.4rem;
@@ -32,10 +39,21 @@
 
 /* Modifications to the original elements */
 
+.combatant-card.is-turn .combatant-card__left-bit {
+    border-top: 2px solid #1b9af0 !important;
+    border-left: 2px solid #1b9af0 !important;
+    border-bottom: 2px solid #1b9af0 !important;
+}
 
 .combatant-card.is-turn .combatant-card__mid-bit {
-    border: none !important;
+    box-shadow: none !important;
+    border: 1px solid #d8e1e8 !important;
     border-top: 2px solid #1b9af0 !important;
+}
+
+.combatant-card.is-turn .combatant-card__right-bit {
+    border-top: 2px solid #1b9af0 !important;
+    border-right: 2px solid #1b9af0 !important;
 }
 
 .combatant-card__left-bit {
