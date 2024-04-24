@@ -6,11 +6,19 @@ let initDone = false;
 const body_mutation_callback = (mutation_list, observer) => {
     for (const mutation of mutation_list) {
         if (mutation.type === "childList") {
-            if (mutation.target.className.includes('combatant-card--character') && mutation.addedNodes.length > 0 && mutation.addedNodes[0].className == 'combatant-card__right-bit') {
-                let extensionDiv = createExtensionsDiv();
-                createEffectDiv(extensionDiv);
-                mutation.target.insertAdjacentElement('afterEnd', extensionDiv);
-                initDone = true;
+            //console.log(mutation);
+            if (mutation.target.className == 'combat-tracker__combatants') {
+                if (mutation.addedNodes.length > 0 && mutation.addedNodes[0].className == 'combatants combatants--all') {
+                    for (let child of mutation.addedNodes[0].children) {
+                        if (child.className.includes('combatant-card--character')) {
+                            let extensionDiv = createExtensionsDiv();
+                            createEffectDiv(extensionDiv);
+                            child.insertAdjacentElement('afterEnd', extensionDiv);
+                            initDone = true;
+                        }
+                    }
+                }
+
             }
         }
         else if (mutation.type === 'characterData') {
