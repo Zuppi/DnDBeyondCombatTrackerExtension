@@ -18,6 +18,7 @@
 .add-effect-btn {
     margin-top: 0.4rem;
     margin-bottom: 0.4rem;
+    margin-left: 0.1rem;
 }
 
 .name-input {
@@ -40,6 +41,21 @@
 .combatant-card.combatant-card--is-dead .combatant-card__left-bit,
 .combatant-card.combatant-card--is-dead .combatant-card__mid-bit {
     background-color: #d8e1e8;
+}
+
+.name-input:disabled,
+.duration-input:disabled {
+    border: none;
+    background-color: transparent;
+    color: #10161a;
+}
+
+.duration-input:disabled {
+    text-align: center;
+}
+
+.effect-header {
+    text-align: left;
 }
 
 /* Modifications to the original elements */

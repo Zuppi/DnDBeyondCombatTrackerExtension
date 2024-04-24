@@ -103,6 +103,7 @@ function createEffectDiv(extensionDiv) {
     let effectsTableHeaderRow = document.createElement('tr');
     let effectsTableNameHeader = document.createElement('th');
     effectsTableNameHeader.innerText = 'Effect name';
+    effectsTableNameHeader.className = 'effect-header';
     effectsTableHeaderRow.appendChild(effectsTableNameHeader);
     let effectsTableDurationHeader = document.createElement('th');
     effectsTableDurationHeader.innerText = 'Duration';
@@ -169,7 +170,7 @@ function setButtonClicked(clickEvent) {
     buttonCell.innerHTML = '';
     let effectsTableRowDeleteBtn = document.createElement('button');
     effectsTableRowDeleteBtn.type = 'button';
-    effectsTableRowDeleteBtn.innerText = 'Delete';
+    effectsTableRowDeleteBtn.innerHTML = 'Delete';
     effectsTableRowDeleteBtn.addEventListener('click', removeButtonClicked);
     buttonCell.appendChild(effectsTableRowDeleteBtn);
 }
