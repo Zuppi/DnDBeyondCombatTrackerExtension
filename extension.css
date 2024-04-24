@@ -37,6 +37,11 @@
     transform: scale(1.5);
 }
 
+.combatant-card.combatant-card--is-dead .combatant-card__left-bit,
+.combatant-card.combatant-card--is-dead .combatant-card__mid-bit {
+    background-color: #d8e1e8;
+}
+
 /* Modifications to the original elements */
 
 .combatant-card.is-turn .combatant-card__left-bit {

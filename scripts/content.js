@@ -1,11 +1,10 @@
 
-const body_mutation_config = { attribute: true, childList: true, subtree: true, characterData: true, characterDataOldValue: true };
+const body_mutation_config = { attribute: true, childList: true, subtree: true, characterData: true, characterDataOldValue: true, attributes: true, attributeFilter: ['class'] };
 
 let initDone = false;
 
 const body_mutation_callback = (mutation_list, observer) => {
     for (const mutation of mutation_list) {
-        //console.log(mutation);
         if (mutation.type === "childList") {
             if (mutation.target.className.includes('combatant-card--character') && mutation.addedNodes.length > 0 && mutation.addedNodes[0].className == 'combatant-card__right-bit') {
                 let extensionDiv = createExtensionsDiv();
@@ -17,17 +16,46 @@ const body_mutation_callback = (mutation_list, observer) => {
         else if (mutation.type === 'characterData') {
             if (mutation.target.parentElement.className == 'combatant-card__hp-current') {
                 // If current value is smaller athan previous, we have lost HP
-                if (parseInt(mutation.target.data) < parseInt(mutation.oldValue)) {
-                    const characterCard = mutation.target.parentElement.closest('.combatant-card');
-                    checkIsConcentrating(characterCard);
+                const combatantCard = mutation.target.parentElement.closest('.combatant-card');
+                const currentHpAmount = parseInt(mutation.target.data);
+                if (combatantCard.className.includes('combatant-card--character')) {
+                    // Card belongs to a character
+                    if (currentHpAmount < parseInt(mutation.oldValue)) {
+                        checkIsConcentrating(combatantCard);
+                    }
                 }
-
+                else {
+                    // Card belongs to a monster
+                    if (currentHpAmount == 0) {
+                        combatantCard.classList.add('combatant-card--is-dead');
+                    }
+                    else if (currentHpAmount > 0 && parseInt(mutation.oldValue) == 0) {
+                        combatantCard.classList.remove('combatant-card--is-dead');
+                    }
+                }
             }
             else if (initDone && mutation.target.parentElement.parentElement.className.includes('turn-controls__turn')) {
                 let activeCharacterCard = document.querySelector('.combatant-card--character.is-turn');
-                activeCharacterCard.nextElementSibling.querySelectorAll('.duration-input').forEach(element => {
-                    element.stepDown();
-                });
+                if (activeCharacterCard != null && activeCharacterCard.nextElementSibling != null) {
+                    activeCharacterCard.nextElementSibling.querySelectorAll('.duration-input').forEach(element => {
+                        element.stepDown();
+                    });
+                }
+
+            }
+        }
+        else if (mutation.type === 'attributes') {
+            if (mutation.attributeName === 'class') {
+                const isSVGANimatedString = mutation.target.className instanceof SVGAnimatedString;
+                if (!isSVGANimatedString) {
+                    if (mutation.target.className.includes('combatant-card--monster') &&
+                        mutation.target.querySelector('.combatant-card__hp-current').innerText == "0" &&
+                        !mutation.target.className.includes('combatant-card--is-dead')) {
+
+                        mutation.target.classList.add('combatant-card--is-dead');
+                    }
+                }
+
             }
         }
     }
