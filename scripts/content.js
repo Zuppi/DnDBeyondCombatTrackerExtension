@@ -6,7 +6,6 @@ let initDone = false;
 const body_mutation_callback = (mutation_list, observer) => {
     for (const mutation of mutation_list) {
         if (mutation.type === "childList") {
-            //console.log(mutation);
             if (mutation.target.className == 'combat-tracker__combatants') {
                 if (mutation.addedNodes.length > 0 && mutation.addedNodes[0].className == 'combatants combatants--all') {
                     for (let child of mutation.addedNodes[0].children) {
