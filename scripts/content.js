@@ -5,6 +5,7 @@ let initDone = false;
 
 const body_mutation_callback = (mutation_list, observer) => {
     for (const mutation of mutation_list) {
+
         if (mutation.type === "childList") {
             if (mutation.target.className == 'combat-tracker__combatants') {
                 if (mutation.addedNodes.length > 0 && mutation.addedNodes[0].className == 'combatants combatants--all') {
@@ -13,11 +14,18 @@ const body_mutation_callback = (mutation_list, observer) => {
                             let extensionDiv = createExtensionsDiv();
                             createEffectDiv(extensionDiv);
                             child.insertAdjacentElement('afterEnd', extensionDiv);
+                            createAddEffectBtn(child);
                             initDone = true;
                         }
                     }
                 }
 
+            }
+            else if (mutation.target.className == 'combatant-summary__stats') {
+                const addEffectBtnDiv = mutation.target.querySelector('.add-effect-line-item');
+                if (addEffectBtnDiv != null && mutation.target.lastChild != addEffectBtnDiv) {
+                    mutation.target.appendChild(addEffectBtnDiv);
+                }
             }
         }
         else if (mutation.type === 'characterData') {
@@ -82,14 +90,16 @@ chrome.runtime.onMessage.addListener(
 );
 
 function addEffectClick(clickEvent) {
-    const parentDiv = clickEvent.target.closest('.effect-div');
-    const effectsTable = parentDiv.querySelector('.effects-table');
+    const combatantCharacterCard = clickEvent.target.closest('.combatant-card--character');
+    const extensionsDiv = combatantCharacterCard.nextElementSibling;
+    extensionsDiv.classList.remove('hidden');
+    const effectsTable = extensionsDiv.querySelector('.effects-table');
     addEffectTableInputRow(effectsTable);
 }
 
 function createExtensionsDiv() {
     let extensionDiv = document.createElement('div');
-    extensionDiv.className = 'extensions-div';
+    extensionDiv.className = 'extension-div hidden';
     return extensionDiv;
 }
 
@@ -99,7 +109,6 @@ function createEffectDiv(extensionDiv) {
     extensionDiv.appendChild(effectDiv);
     let effectsTable = document.createElement('table');
     effectsTable.className = 'effects-table';
-    effectsTable.style.display = 'none';
     let effectsTableHeaderRow = document.createElement('tr');
     let effectsTableNameHeader = document.createElement('th');
     effectsTableNameHeader.innerText = 'Effect name';
@@ -115,12 +124,22 @@ function createEffectDiv(extensionDiv) {
     effectsTableHeaderRow.appendChild(document.createElement('th'));
     effectsTable.appendChild(effectsTableHeaderRow);
     effectDiv.appendChild(effectsTable);
-    let addEffectBtn = document.createElement('button');
-    addEffectBtn.type = 'button';
-    addEffectBtn.className = 'add-effect-btn';
-    addEffectBtn.innerText = 'Add effect';
-    addEffectBtn.addEventListener('click', addEffectClick);
-    effectDiv.appendChild(addEffectBtn);
+}
+
+function createAddEffectBtn(characterCard) {
+    const statsDiv = characterCard.querySelector('.combatant-summary__stats');
+    if (statsDiv != null) {
+        console.log('addin button');
+        const addEffectButtonDiv = document.createElement('div');
+        addEffectButtonDiv.className = 'line-item line-item-horizontal add-effect-line-item';
+        const addEffectButton = document.createElement('button');
+        addEffectButton.type = 'button';
+        addEffectButton.className = 'add-effect-btn';
+        addEffectButton.innerText = 'Add effect';
+        addEffectButton.addEventListener('click', addEffectClick);
+        addEffectButtonDiv.appendChild(addEffectButton);
+        statsDiv.appendChild(addEffectButtonDiv);
+    }
 }
 
 function addEffectTableInputRow(effectsTable) {
@@ -155,9 +174,6 @@ function addEffectTableInputRow(effectsTable) {
     effectsTableSetBtnCell.appendChild(effectsTableSetBtn);
     effectsTableInputRow.appendChild(effectsTableSetBtnCell);
     effectsTable.appendChild(effectsTableInputRow);
-    if (effectsTable.style.display == 'none') {
-        effectsTable.style.display = 'block';
-    }
 }
 
 function setButtonClicked(clickEvent) {
@@ -180,7 +196,8 @@ function removeButtonClicked(clickEvent) {
     let effectsTable = clickEvent.target.closest('table');
     clickEvent.target.closest('tr').remove();
     if (effectsTable.querySelector('td') == null) {
-        effectsTable.style.display = 'none';
+        // If table has no data cells, hide the extension div
+        effectsTable.closest('.extension-div').classList.add('hidden');
     }
 }
 

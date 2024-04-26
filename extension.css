@@ -1,5 +1,5 @@
 /* Extension styles */
-.extensions-div {
+.extension-div {
     display: flex;
     margin-bottom: 8px;
     padding: 3px;
@@ -8,17 +8,15 @@
     border-bottom-right-radius: 3px;
 }
 
-.is-turn+.extensions-div {
+.extension-div .hidden {
+    display: none;
+}
+
+.is-turn+.extension-div {
     border: none;
     border-left: 2px solid #1b9af0;
     border-bottom: 2px solid #1b9af0;
     border-right: 2px solid #1b9af0;
-}
-
-.add-effect-btn {
-    margin-top: 0.4rem;
-    margin-bottom: 0.4rem;
-    margin-left: 0.1rem;
 }
 
 .name-input {
@@ -85,10 +83,26 @@
     border-bottom: 2px solid #1b9af0 !important;
 }
 
-.combatant-card__left-bit {
+.combatant-card--character:has(+ .extension-div:not(.hidden)) .combatant-card__left-bit {
     border-bottom-left-radius: 0px !important;
 }
 
-.combatant-card__right-bit {
+.combatant-card--character:has(+ .extension-div:not(.hidden)) .combatant-card__right-bit {
     border-bottom-right-radius: 0px !important;
+}
+
+.combatant-card--character.is-turn:has(+ .extension-div.hidden) .combatant-card__left-bit {
+    border-bottom: 2px solid #1b9af0 !important;
+}
+
+.combatant-card--character.is-turn:has(+ .extension-div.hidden) .combatant-card__mid-bit {
+    border-bottom: 2px solid #1b9af0 !important;
+}
+
+.combatant-card--character.is-turn:has(+ .extension-div.hidden) .combatant-card__right-bit {
+    border-bottom: 2px solid #1b9af0 !important;
+}
+
+.extension-div+.combatant-card {
+    margin-top: 8px;
 }
