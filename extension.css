@@ -33,12 +33,23 @@
 }
 
 .concentrate-checkbox {
+    margin-top: 4px;
     transform: scale(1.5);
 }
 
 .combatant-card.combatant-card--is-dead .combatant-card__left-bit,
 .combatant-card.combatant-card--is-dead .combatant-card__mid-bit {
     background-color: #d8e1e8;
+}
+
+input.duration-input::-webkit-outer-spin-button,
+input.duration-input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number].duration-input {
+    -moz-appearance: textfield;
 }
 
 .name-input:disabled,
@@ -54,6 +65,55 @@
 
 .effect-header {
     text-align: left;
+}
+
+.add-effect-btn {
+    border: none;
+    background-color: transparent;
+    color: green;
+    cursor: pointer;
+}
+
+.add-effect-btn::before {
+    background-color: white;
+    border: 1px solid #888;
+    border-radius: 2px;
+    color: #444;
+    content: attr(data-tooltiptext);
+    display: none;
+    font-family: sans-serif;
+    font-size: 14px;
+    padding: 2px 5px;
+    position: absolute;
+    z-index: 1;
+    transform: translateX(30%);
+}
+
+.add-effect-btn:hover::before {
+    display: block;
+}
+
+.add-effect-btn:hover {
+    color: rgb(3, 173, 3);
+}
+
+.add-effect-btn:hover .tooltiptext {
+    visibility: visible;
+}
+
+.add-effect-btn:focus,
+.add-effect-btn:active,
+.add-effect-btn:active:focus {
+    outline-style: none;
+}
+
+.add-effect-btn:active {
+    color: rgb(0, 87, 0);
+}
+
+.ddbeb-button-small {
+    height: 22px !important;
+    padding: 0 8px;
 }
 
 /* Modifications to the original elements */

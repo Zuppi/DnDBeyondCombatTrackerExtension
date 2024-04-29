@@ -129,13 +129,13 @@ function createEffectDiv(extensionDiv) {
 function createAddEffectBtn(characterCard) {
     const statsDiv = characterCard.querySelector('.combatant-summary__stats');
     if (statsDiv != null) {
-        console.log('addin button');
         const addEffectButtonDiv = document.createElement('div');
         addEffectButtonDiv.className = 'line-item line-item-horizontal add-effect-line-item';
         const addEffectButton = document.createElement('button');
         addEffectButton.type = 'button';
         addEffectButton.className = 'add-effect-btn';
-        addEffectButton.innerText = 'Add effect';
+        addEffectButton.dataset.tooltiptext = 'Add new effect';
+        addEffectButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="width:24px;height:24px;"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v6m3-3H9m12 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>';
         addEffectButton.addEventListener('click', addEffectClick);
         addEffectButtonDiv.appendChild(addEffectButton);
         statsDiv.appendChild(addEffectButtonDiv);
@@ -169,6 +169,7 @@ function addEffectTableInputRow(effectsTable) {
     effectsTableSetBtnCell.className = 'btn-cell';
     let effectsTableSetBtn = document.createElement('button');
     effectsTableSetBtn.type = 'button';
+    effectsTableSetBtn.className = 'ddbeb-button ddbeb-button--dark ddbeb-button-small';
     effectsTableSetBtn.innerText = 'Set';
     effectsTableSetBtn.addEventListener('click', setButtonClicked);
     effectsTableSetBtnCell.appendChild(effectsTableSetBtn);
@@ -187,6 +188,7 @@ function setButtonClicked(clickEvent) {
     let effectsTableRowDeleteBtn = document.createElement('button');
     effectsTableRowDeleteBtn.type = 'button';
     effectsTableRowDeleteBtn.innerHTML = 'Delete';
+    effectsTableRowDeleteBtn.className = 'ddbeb-button ddbeb-button-small';
     effectsTableRowDeleteBtn.addEventListener('click', removeButtonClicked);
     buttonCell.appendChild(effectsTableRowDeleteBtn);
 }
