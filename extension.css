@@ -42,6 +42,11 @@
     background-color: #d8e1e8;
 }
 
+
+.combatant-card.combatant-card--is-dead .combatant-summary__avatar::after {
+    display: none;
+}
+
 input.duration-input::-webkit-outer-spin-button,
 input.duration-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
