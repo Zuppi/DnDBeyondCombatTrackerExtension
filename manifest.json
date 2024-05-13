@@ -16,7 +16,8 @@
     "content_scripts": [
         {
             "matches": [
-                "https://www.dndbeyond.com/combat-tracker/*"
+                "https://www.dndbeyond.com/combat-tracker/*",
+                "https://www.dndbeyond.com/my-encounters"
             ],
             "js": [
                 "scripts/content.js"
